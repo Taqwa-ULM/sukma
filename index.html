@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathPrep — Materi & Latihan 30 Soal SPLDV & Bangun Ruang</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & smooth transitions */
+        html {
+            scroll-behavior: smooth;
+        }
+        .math-eq {
+            font-family: 'Inter', sans-serif;
+            font-variant-numeric: tabular-nums;
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 2px;
+            font-size: 0.9em;
+            line-height: 1.1;
+        }
+        .frac > span:first-child {
+            border-bottom: 1.5px solid currentColor;
+            padding: 0 3px;
+        }
+        .frac > span:last-child {
+            padding: 0 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-3">
+                <!-- Brand -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                            M
+                        </div>
+                        <div>
+                            <h1 class="font-bold text-slate-900 leading-tight text-base sm:text-lg">MathPrep Les</h1>
+                            <p class="text-xs text-slate-500">SPLDV & Bangun Ruang • 30 Soal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Mode Tabs -->
+                <nav class="flex bg-slate-100 p-1 rounded-xl gap-1 overflow-x-auto" aria-label="Navigasi Utama">
+                    <button id="tab-materi" onclick="switchMainTab('materi')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap bg-white text-indigo-700 shadow-sm">
+                        📖 Materi
+                    </button>
+                    <button id="tab-belajar" onclick="switchMainTab('belajar')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">
+                        💡 Mode Belajar
+                    </button>
+                    <button id="tab-simulasi" onclick="switchMainTab('simulasi')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">
+                        ⏱️ Mode Simulasi
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+        <!-- ========================================================= -->
+        <!-- SECTION 1: RANGKUMAN MATERI                               -->
+        <!-- ========================================================= -->
+        <section id="section-materi" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-2xl p-6 sm:p-8 text-white shadow-md">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-2 max-w-2xl">
+                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold tracking-wide uppercase">Persiapan Les Matematika</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold">Rangkuman Materi SPLDV & Bangun Ruang</h2>
+                        <p class="text-indigo-100 text-sm sm:text-base">
+                            Pelajari konsep inti, rumus cepat, dan strategi menyelesaikan soal cerita sebelum masuk ke sesi latihan 30 soal.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="switchMainTab('belajar')" class="px-4 py-2.5 bg-white text-indigo-700 font-semibold rounded-xl text-sm hover:bg-indigo-50 transition shadow-sm">
+                            Mulai Mode Belajar →
+                        </button>
+                        <button onclick="switchMainTab('simulasi')" class="px-4 py-2.5 bg-indigo-500/40 border border-white/30 text-white font-semibold rounded-xl text-sm hover:bg-indigo-500/60 transition">
+                            Coba Simulasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-tab Materi Selector -->
+            <div class="flex gap-2 border-b border-slate-200 pb-3">
+                <button id="subtab-spldv" onclick="switchMateriSubtab('spldv')" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition">
+                    1. SPLDV (Sistem Persamaan Linear Dua Variabel)
+                </button>
+                <button id="subtab-bangun" onclick="switchMateriSubtab('bangun')" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition">
+                    2. Bangun Ruang (Sisi Datar & Lengkung)
+                </button>
+            </div>
+
+            <!-- MATERI SPLDV -->
+            <div id="materi-spldv" class="space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Konsep Dasar -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold">A</span>
+                            Pengertian & Bentuk Umum
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            <strong>SPLDV</strong> adalah sistem yang terdiri dari dua persamaan linear yang masing-masing memiliki dua variabel (biasanya <em>x</em> dan <em>y</em>) berpangkat satu. Penyelesaiannya berupa pasangan berurutan <strong>(x, y)</strong> yang memenuhi kedua persamaan sekaligus.
+                        </p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 math-eq text-center">
+                            <div class="text-base sm:text-lg font-bold text-indigo-700">a₁x + b₁y = c₁</div>
+                            <div class="text-base sm:text-lg font-bold text-indigo-700">a₂x + b₂y = c₂</div>
+                            <p class="text-xs text-slate-500 mt-2">dengan a₁, b₁, c₁, a₂, b₂, c₂ adalah bilangan real dan a, b ≠ 0.</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                                <h4 class="font-bold text-emerald-900 text-sm mb-1">1. Metode Eliminasi</h4>
+                                <p class="text-xs text-emerald-800 leading-relaxed">Menghilangkan salah satu variabel dengan cara menyamakan koefisiennya, lalu menjumlahkan atau mengurangkan kedua persamaan.</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200">
+                                <h4 class="font-bold text-sky-900 text-sm mb-1">2. Metode Substitusi</h4>
+                                <p class="text-xs text-sky-800 leading-relaxed">Mengubah salah satu persamaan menjadi bentuk <em>x = ...</em> atau <em>y = ...</em>, lalu memasukkannya ke persamaan lainnya.</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-violet-50 border border-violet-200">
+                                <h4 class="font-bold text-violet-900 text-sm mb-1">3. Metode Campuran (Tercepat!)</h4>
+                                <p class="text-xs text-violet-800 leading-relaxed">Lakukan <strong>eliminasi</strong> untuk menemukan satu variabel, lalu <strong>substitusi</strong> nilai tersebut ke persamaan yang paling sederhana.</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
+                                <h4 class="font-bold text-amber-900 text-sm mb-1">4. Metode Grafik</h4>
+                                <p class="text-xs text-amber-800 leading-relaxed">Menggambar kedua garis pada bidang Kartesius. <strong>Titik potong</strong> kedua garis adalah himpunan penyelesaiannya.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Grafik SPLDV -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2">Ilustrasi Titik Potong</h3>
+                            <p class="text-xs text-slate-500 mb-4">Contoh: x + y = 5 dan x - y = 1 berpotongan di (3, 2).</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <svg viewBox="0 0 220 200" class="w-full max-w-[240px] h-auto">
+                                <!-- Grid -->
+                                <g stroke="#e2e8f0" stroke-width="1">
+                                    <line x1="30" y1="20" x2="30" y2="170" />
+                                    <line x1="60" y1="20" x2="60" y2="170" />
+                                    <line x1="90" y1="20" x2="90" y2="170" />
+                                    <line x1="120" y1="20" x2="120" y2="170" />
+                                    <line x1="150" y1="20" x2="150" y2="170" />
+                                    <line x1="180" y1="20" x2="180" y2="170" />
+                                    <line x1="20" y1="30" x2="200" y2="30" />
+                                    <line x1="20" y1="60" x2="200" y2="60" />
+                                    <line x1="20" y1="90" x2="200" y2="90" />
+                                    <line x1="20" y1="120" x2="200" y2="120" />
+                                    <line x1="20" y1="150" x2="200" y2="150" />
+                                </g>
+                                <!-- Axes -->
+                                <line x1="30" y1="15" x2="30" y2="175" stroke="#475569" stroke-width="2" />
+                                <line x1="20" y1="150" x2="205" y2="150" stroke="#475569" stroke-width="2" />
+                                <text x="200" y="165" font-size="11" fill="#475569" font-weight="bold">x</text>
+                                <text x="18" y="22" font-size="11" fill="#475569" font-weight="bold">y</text>
+                                <!-- Line 1: x + y = 5 -> (0,5) at (30,30) to (5,0) at (180,150) [scale 30px = 1 unit? Wait: 5 units = 120px -> 24px/unit] -->
+                                <!-- Let's use 25px/unit: origin=(30,150). (0,5)=(30,25), (5,0)=(155,150). (3,2)=(105,100) -->
+                                <line x1="30" y1="25" x2="155" y2="150" stroke="#4f46e5" stroke-width="2.5" />
+                                <!-- Line 2: x - y = 1 -> (1,0)=(55,150) to (5,4)=(155,50) -->
+                                <line x1="55" y1="150" x2="165" y2="40" stroke="#0d9488" stroke-width="2.5" />
+                                <!-- Dashed guides to (3,2) = (105,100) -->
+                                <line x1="105" y1="100" x2="105" y2="150" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4 3" />
+                                <line x1="30" y1="100" x2="105" y2="100" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4 3" />
+                                <!-- Intersection point -->
+                                <circle cx="105" cy="100" r="5" fill="#f43f5e" />
+                                <text x="114" y="104" font-size="11" fill="#be123c" font-weight="bold">(3, 2)</text>
+                                <text x="38" y="34" font-size="10" fill="#4f46e5" font-weight="600">x + y = 5</text>
+                                <text x="132" y="42" font-size="10" fill="#0d9488" font-weight="600">x - y = 1</text>
+                            </svg>
+                        </div>
+                        <div class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                            <strong>Tips Soal Cerita:</strong>
+                            <ol class="list-decimal list-inside mt-1 space-y-1">
+                                <li>Buat pemisalan variabel (misal: buku = <em>x</em>, pensil = <em>y</em>).</li>
+                                <li>Ubah kalimat menjadi 2 persamaan.</li>
+                                <li>Selesaikan & cek kembali apa yang ditanyakan soal!</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Soal SPLDV -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-900 mb-3">Contoh Cepat (Metode Campuran)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <p class="font-semibold text-slate-800 mb-2">Soal:</p>
+                            <p class="text-slate-600">Tentukan nilai <em>x</em> dan <em>y</em> dari sistem persamaan:</p>
+                            <p class="font-bold text-indigo-700 mt-1">2x + 3y = 13 &nbsp;dan&nbsp; x - y = -1</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-1.5 text-slate-700">
+                            <p class="font-semibold text-indigo-900">Penyelesaian:</p>
+                            <p>1. <strong>Eliminasi y:</strong> Kalikan pers. (2) dengan 3 → 3x - 3y = -3</p>
+                            <p>2. Jumlahkan: (2x + 3y) + (3x - 3y) = 13 + (-3) → 5x = 10 → <strong>x = 2</strong></p>
+                            <p>3. <strong>Substitusi x = 2</strong> ke x - y = -1 → 2 - y = -1 → <strong>y = 3</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATERI BANGUN RUANG -->
+            <div id="materi-bangun" class="hidden space-y-6">
+                <!-- Bangun Ruang Sisi Datar -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold">1</span>
+                        Bangun Ruang Sisi Datar
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Kubus -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex gap-4 items-start">
+                            <svg viewBox="0 0 90 90" class="w-20 h-20 shrink-0 text-indigo-600">
+                                <rect x="15" y="28" width="42" height="42" fill="#eef2ff" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="15,28 33,12 75,12 57,28" fill="#e0e7ff" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="57,28 75,12 75,54 57,70" fill="#c7d2fe" stroke="currentColor" stroke-width="2"/>
+                                <line x1="33" y1="12" x2="33" y2="54" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="15" y1="70" x2="33" y2="54" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="33" y1="54" x2="75" y2="54" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            </svg>
+                            <div class="space-y-1.5 text-sm flex-1">
+                                <h4 class="font-bold text-slate-900 text-base">Kubus (rusuk = s)</h4>
+                                <p class="text-slate-600">• <strong>Volume:</strong> V = s³</p>
+                                <p class="text-slate-600">• <strong>Luas Permukaan:</strong> L = 6 × s²</p>
+                                <p class="text-slate-600">• <strong>Diagonal Bidang:</strong> s√2 &nbsp;|&nbsp; <strong>Diagonal Ruang:</strong> s√3</p>
+                                <p class="text-xs text-slate-500">Panjang seluruh rusuk = 12 × s</p>
+                            </div>
+                        </div>
+
+                        <!-- Balok -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex gap-4 items-start">
+                            <svg viewBox="0 0 100 90" class="w-20 h-20 shrink-0 text-teal-600">
+                                <rect x="10" y="32" width="56" height="36" fill="#f0fdfa" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="10,32 28,16 84,16 66,32" fill="#ccfbf1" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="66,32 84,16 84,52 66,68" fill="#99f6e4" stroke="currentColor" stroke-width="2"/>
+                                <line x1="28" y1="16" x2="28" y2="52" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="10" y1="68" x2="28" y2="52" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="28" y1="52" x2="84" y2="52" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            </svg>
+                            <div class="space-y-1.5 text-sm flex-1">
+                                <h4 class="font-bold text-slate-900 text-base">Balok (p, l, t)</h4>
+                                <p class="text-slate-600">• <strong>Volume:</strong> V = p × l × t</p>
+                                <p class="text-slate-600">• <strong>Luas Permukaan:</strong> L = 2(pl + pt + lt)</p>
+                                <p class="text-slate-600">• <strong>Kerangka (Total Rusuk):</strong> 4(p + l + t)</p>
+                                <p class="text-xs text-slate-500">Diagonal ruang = √(p² + l² + t²)</p>
+                            </div>
+                        </div>
+
+                        <!-- Prisma -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex gap-4 items-start">
+                            <svg viewBox="0 0 90 90" class="w-20 h-20 shrink-0 text-amber-600">
+                                <polygon points="20,25 45,10 70,25" fill="#fef3c7" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="20,25 45,35 45,75 20,65" fill="#fffbeb" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="45,35 70,25 70,65 45,75" fill="#fde68a" stroke="currentColor" stroke-width="2"/>
+                                <line x1="20" y1="65" x2="70" y2="65" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            </svg>
+                            <div class="space-y-1.5 text-sm flex-1">
+                                <h4 class="font-bold text-slate-900 text-base">Prisma Tegak</h4>
+                                <p class="text-slate-600">• <strong>Volume:</strong> V = Luas Alas × t</p>
+                                <p class="text-slate-600">• <strong>Luas Permukaan:</strong> L = (2 × Luas Alas) + (Keliling Alas × t)</p>
+                                <p class="text-xs text-slate-500">Ingat Pythagoras untuk mencari sisi miring segitiga siku-siku pada alas!</p>
+                            </div>
+                        </div>
+
+                        <!-- Limas -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex gap-4 items-start">
+                            <svg viewBox="0 0 90 90" class="w-20 h-20 shrink-0 text-rose-600">
+                                <polygon points="45,12 16,66 56,74" fill="#fff1f2" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="45,12 56,74 76,56" fill="#ffe4e6" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="66" x2="36" y2="50" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="36" y1="50" x2="76" y2="56" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <line x1="45" y1="12" x2="36" y2="50" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            </svg>
+                            <div class="space-y-1.5 text-sm flex-1">
+                                <h4 class="font-bold text-slate-900 text-base">Limas</h4>
+                                <p class="text-slate-600">• <strong>Volume:</strong> V = ⅓ × Luas Alas × t</p>
+                                <p class="text-slate-600">• <strong>Luas Permukaan:</strong> L = Luas Alas + Jumlah Luas Sisi Tegak</p>
+                                <p class="text-xs text-slate-500">Tinggi sisi tegak (segitiga) ≠ tinggi limas. Gunakan Pythagoras!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bangun Ruang Sisi Lengkung -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center text-sm font-bold">2</span>
+                        Bangun Ruang Sisi Lengkung
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Tabung -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+                            <div class="flex items-center gap-3">
+                                <svg viewBox="0 0 70 80" class="w-14 h-16 shrink-0 text-sky-600">
+                                    <path d="M12,18 L12,62 A23,9 0 0,0 58,62 L58,18" fill="#f0f9ff" stroke="currentColor" stroke-width="2"/>
+                                    <ellipse cx="35" cy="18" rx="23" ry="9" fill="#bae6fd" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12,62 A23,9 0 0,1 58,62" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                </svg>
+                                <h4 class="font-bold text-slate-900 text-base">Tabung (r, t)</h4>
+                            </div>
+                            <div class="space-y-1 text-sm text-slate-600">
+                                <p>• <strong>Volume:</strong> πr²t</p>
+                                <p>• <strong>Luas Selimut:</strong> 2πrt</p>
+                                <p>• <strong>L. Permukaan:</strong> 2πr(r + t)</p>
+                                <p>• <strong>Tanpa Tutup:</strong> πr(r + 2t)</p>
+                            </div>
+                        </div>
+
+                        <!-- Kerucut -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+                            <div class="flex items-center gap-3">
+                                <svg viewBox="0 0 70 80" class="w-14 h-16 shrink-0 text-purple-600">
+                                    <path d="M35,10 L12,62 A23,9 0 0,0 58,62 Z" fill="#faf5ff" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12,62 A23,9 0 0,1 58,62" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                    <line x1="35" y1="10" x2="35" y2="62" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                </svg>
+                                <h4 class="font-bold text-slate-900 text-base">Kerucut (r, t, s)</h4>
+                            </div>
+                            <div class="space-y-1 text-sm text-slate-600">
+                                <p>• <strong>Volume:</strong> ⅓πr²t</p>
+                                <p>• <strong>Luas Selimut:</strong> πrs</p>
+                                <p>• <strong>L. Permukaan:</strong> πr(r + s)</p>
+                                <p>• <strong>Garis Pelukis:</strong> s² = r² + t²</p>
+                            </div>
+                        </div>
+
+                        <!-- Bola -->
+                        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+                            <div class="flex items-center gap-3">
+                                <svg viewBox="0 0 70 80" class="w-14 h-16 shrink-0 text-emerald-600">
+                                    <circle cx="35" cy="40" r="26" fill="#ecfdf5" stroke="currentColor" stroke-width="2"/>
+                                    <ellipse cx="35" cy="40" rx="26" ry="8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 3"/>
+                                </svg>
+                                <h4 class="font-bold text-slate-900 text-base">Bola (r)</h4>
+                            </div>
+                            <div class="space-y-1 text-sm text-slate-600">
+                                <p>• <strong>Volume:</strong> ⁴⁄₃πr³</p>
+                                <p>• <strong>L. Permukaan:</strong> 4πr²</p>
+                                <p>• <strong>½ Bola Berongga:</strong> L = 2πr²</p>
+                                <p>• <strong>½ Bola Padat:</strong> L = 3πr²</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-900">
+                        <strong>Catatan Nilai π:</strong> Gunakan <strong>π = 22/7</strong> jika jari-jari (r) atau diameter (d) merupakan kelipatan 7. Gunakan <strong>π = 3,14</strong> jika bukan kelipatan 7.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 2: MODE BELAJAR (INTERAKTIF + PEMBAHASAN)         -->
+        <!-- ========================================================= -->
+        <section id="section-belajar" class="hidden space-y-6">
+            <!-- Top Control Bar -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Mode Belajar Interaktif</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Pilih jawaban untuk langsung melihat benar/salah dan pembahasan lengkapnya.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="inline-flex bg-slate-100 p-1 rounded-xl">
+                        <button onclick="setBelajarFilter('ALL')" id="filter-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 shadow-sm">Semua (30)</button>
+                        <button onclick="setBelajarFilter('SPLDV')" id="filter-spldv" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900">SPLDV (15)</button>
+                        <button onclick="setBelajarFilter('Bangun Ruang')" id="filter-bangun" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900">Bangun Ruang (15)</button>
+                    </div>
+                    <button onclick="openResetBelajarModal()" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition">
+                        ↺ Ulangi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Stats Bar -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white rounded-xl border border-slate-200 p-3.5 text-center shadow-sm">
+                    <div class="text-xs text-slate-500 font-medium">Dijawab</div>
+                    <div id="belajar-stat-answered" class="text-xl font-extrabold text-slate-800">0 / 30</div>
+                </div>
+                <div class="bg-emerald-50 rounded-xl border border-emerald-200 p-3.5 text-center shadow-sm">
+                    <div class="text-xs text-emerald-700 font-medium">Benar</div>
+                    <div id="belajar-stat-correct" class="text-xl font-extrabold text-emerald-700">0</div>
+                </div>
+                <div class="bg-rose-50 rounded-xl border border-rose-200 p-3.5 text-center shadow-sm">
+                    <div class="text-xs text-rose-700 font-medium">Salah</div>
+                    <div id="belajar-stat-wrong" class="text-xl font-extrabold text-rose-700">0</div>
+                </div>
+            </div>
+
+            <!-- Belajar Main Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Question Area -->
+                <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 p-5 sm:p-7 shadow-sm space-y-6">
+                    <!-- Question Meta -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <span id="belajar-q-number" class="px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold">Soal 1</span>
+                            <span id="belajar-q-topic" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">SPLDV</span>
+                            <span id="belajar-q-level" class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-semibold">Mudah</span>
+                        </div>
+                        <span id="belajar-q-counter" class="text-xs font-medium text-slate-400">1 dari 30</span>
+                    </div>
+
+                    <!-- Question Text -->
+                    <div id="belajar-q-text" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed math-eq"></div>
+
+                    <!-- Options -->
+                    <div id="belajar-options" class="space-y-3"></div>
+
+                    <!-- Explanation Box (Shown after answering) -->
+                    <div id="belajar-explanation" class="hidden rounded-2xl p-5 border space-y-2 transition-all">
+                        <div class="flex items-center gap-2 font-bold text-sm" id="belajar-exp-header"></div>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-1.5 math-eq" id="belajar-exp-body"></div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <button id="belajar-btn-prev" onclick="navigateBelajar(-1)" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                            ← Sebelumnya
+                        </button>
+                        <button id="belajar-btn-next" onclick="navigateBelajar(1)" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm">
+                            Selanjutnya →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigator Sidebar -->
+                <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-slate-800 text-sm">Navigasi Soal</h3>
+                        <span class="text-xs text-slate-400">Klik nomor untuk lompat</span>
+                    </div>
+                    <div id="belajar-nav-grid" class="grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-5 gap-2"></div>
+                    <div class="flex flex-wrap gap-3 pt-3 border-t border-slate-100 text-xs text-slate-500">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> Benar</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> Salah</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> Belum</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 3: MODE SIMULASI (UJIAN DENGAN TIMER)             -->
+        <!-- ========================================================= -->
+        <section id="section-simulasi" class="hidden space-y-6">
+
+            <!-- SIMULASI VIEW A: INTRO / SETUP -->
+            <div id="sim-intro" class="max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl mx-auto">
+                        ⏱️
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900">Mode Simulasi Ujian</h2>
+                    <p class="text-sm text-slate-500">Uji pemahamanmu tanpa melihat pembahasan terlebih dahulu. Cocok untuk evaluasi akhir sesi les.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="text-xs text-slate-500">Jumlah Soal</div>
+                        <div class="text-lg font-bold text-slate-800">30 Soal</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="text-xs text-slate-500">Komposisi</div>
+                        <div class="text-sm font-bold text-slate-800 mt-1">15 SPLDV & 15 B. Ruang</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="text-xs text-slate-500">Penilaian</div>
+                        <div class="text-lg font-bold text-slate-800">Skala 100</div>
+                    </div>
+                </div>
+
+                <!-- Timer Duration Selector -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-700">Pilih Durasi Waktu Simulasi:</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="selectSimDuration(45)" id="dur-45" class="py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">45 Menit</button>
+                        <button onclick="selectSimDuration(60)" id="dur-60" class="py-2.5 px-3 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-sm font-bold text-indigo-700 transition">60 Menit</button>
+                        <button onclick="selectSimDuration(90)" id="dur-90" class="py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">90 Menit</button>
+                    </div>
+                </div>
+
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <li>• Pembahasan lengkap baru akan muncul setelah kamu menekan tombol <strong>Selesai & Kumpulkan</strong>.</li>
+                    <li>• Kamu bisa menggunakan tombol <strong>Tandai Ragu-ragu</strong> untuk menandai soal yang ingin dicek ulang.</li>
+                    <li>• Jika waktu habis, jawaban akan otomatis dikumpulkan dan dinilai.</li>
+                </ul>
+
+                <button onclick="startSimulation()" class="w-full py-3.5 rounded-xl bg-indigo-600 text-white font-bold text-base hover:bg-indigo-700 transition shadow-md">
+                    Mulai Simulasi Sekarang
+                </button>
+            </div>
+
+            <!-- SIMULASI VIEW B: ACTIVE EXAM -->
+            <div id="sim-active" class="hidden space-y-5">
+                <!-- Exam Top Bar -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="px-3.5 py-2 rounded-xl bg-slate-900 text-white font-mono font-bold text-base sm:text-lg flex items-center gap-2" id="sim-timer-box">
+                            <span>⏱️</span>
+                            <span id="sim-timer-text">60:00</span>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Terjawab</div>
+                            <div id="sim-progress-text" class="text-sm font-bold text-slate-800">0 / 30 Soal</div>
+                        </div>
+                    </div>
+                    <button onclick="openFinishSimModal()" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition shadow-sm">
+                        ✓ Selesai & Kumpulkan
+                    </button>
+                </div>
+
+                <!-- Exam Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Question Card -->
+                    <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 p-5 sm:p-7 shadow-sm space-y-6">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span id="sim-q-number" class="px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold">Soal 1</span>
+                                <span id="sim-q-topic" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">SPLDV</span>
+                            </div>
+                            <button id="sim-btn-flag" onclick="toggleSimFlag()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:border-amber-300 transition flex items-center gap-1.5">
+                                <span>🚩</span> <span id="sim-flag-label">Tandai Ragu-ragu</span>
+                            </button>
+                        </div>
+
+                        <div id="sim-q-text" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed math-eq"></div>
+
+                        <div id="sim-options" class="space-y-3"></div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <button id="sim-btn-prev" onclick="navigateSim(-1)" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                                ← Sebelumnya
+                            </button>
+                            <button id="sim-btn-next" onclick="navigateSim(1)" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm">
+                                Selanjutnya →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exam Navigator -->
+                    <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+                        <h3 class="font-bold text-slate-800 text-sm">Daftar Nomor Soal</h3>
+                        <div id="sim-nav-grid" class="grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-5 gap-2"></div>
+                        <div class="flex flex-wrap gap-3 pt-3 border-t border-slate-100 text-xs text-slate-500">
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span> Dijawab</span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-400 inline-block"></span> Ragu-ragu</span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> Kosong</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMULASI VIEW C: RESULT & REVIEW -->
+            <div id="sim-result" class="hidden space-y-6">
+                <!-- Score Summary Card -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="text-center md:text-left space-y-2">
+                            <span id="res-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-100 text-emerald-700">Hasil Simulasi</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Evaluasi Persiapan Les</h2>
+                            <p id="res-message" class="text-sm text-slate-600 max-w-lg"></p>
+                            <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-2">
+                                <button onclick="resetSimulationToIntro()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition">
+                                    ↺ Coba Simulasi Lagi
+                                </button>
+                                <button onclick="switchMainTab('materi')" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition">
+                                    📖 Baca Ulang Materi
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Big Score Circle -->
+                        <div class="flex items-center gap-6">
+                            <div class="w-32 h-32 rounded-full border-8 border-indigo-100 bg-indigo-50 flex flex-col items-center justify-center shrink-0">
+                                <span class="text-xs font-semibold text-indigo-600 uppercase">Nilai</span>
+                                <span id="res-score" class="text-4xl font-extrabold text-indigo-700">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats & Topic Breakdown -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 pt-6 border-t border-slate-100">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
+                                <div class="text-xs text-emerald-700 font-medium">Benar</div>
+                                <div id="res-correct" class="text-2xl font-extrabold text-emerald-700">0</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-center">
+                                <div class="text-xs text-rose-700 font-medium">Salah</div>
+                                <div id="res-wrong" class="text-2xl font-extrabold text-rose-700">0</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-100 border border-slate-200 text-center">
+                                <div class="text-xs text-slate-600 font-medium">Kosong</div>
+                                <div id="res-empty" class="text-2xl font-extrabold text-slate-700">0</div>
+                            </div>
+                        </div>
+
+                        <!-- Per Topic Mastery -->
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-slate-700">Penguasaan SPLDV</span>
+                                    <span id="res-spldv-text" class="text-indigo-700">0 / 15 (0%)</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div id="res-spldv-bar" class="h-full bg-indigo-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-slate-700">Penguasaan Bangun Ruang</span>
+                                    <span id="res-bangun-text" class="text-teal-700">0 / 15 (0%)</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div id="res-bangun-bar" class="h-full bg-teal-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Pembahasan -->
+                <div class="space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <h3 class="text-lg font-bold text-slate-900">Pembahasan Lengkap (30 Soal)</h3>
+                        <div class="inline-flex bg-white border border-slate-200 p-1 rounded-xl">
+                            <button onclick="renderSimReview('ALL')" id="rev-filter-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Semua</button>
+                            <button onclick="renderSimReview('WRONG')" id="rev-filter-wrong" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900">Salah / Kosong</button>
+                            <button onclick="renderSimReview('CORRECT')" id="rev-filter-correct" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900">Benar</button>
+                        </div>
+                    </div>
+                    <div id="sim-review-list" class="space-y-4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Custom Modal (Replacement for confirm/alert) -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
+            <h3 id="modal-title" class="text-lg font-bold text-slate-900">Konfirmasi</h3>
+            <p id="modal-body" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
+                    Batal
+                </button>
+                <button id="modal-confirm-btn" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition">
+                    Ya, Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-center text-xs text-slate-400">
+            MathPrep Les • Bank 30 Soal SPLDV & Bangun Ruang dengan Mode Belajar & Simulasi
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        /**
+         * =====================================================================
+         * BANK 30 SOAL (15 SPLDV + 15 BANGUN RUANG)
+         * Seluruh perhitungan, opsi, dan pembahasan telah diverifikasi.
+         * =====================================================================
+         */
+        const QUESTIONS = [
+            // ==================== 15 SOAL SPLDV ====================
+            {
+                id: 1,
+                topic: "SPLDV",
+                level: "Mudah",
+                question: "Diketahui sistem persamaan linear <strong>x + y = 12</strong> dan <strong>x − y = 4</strong>. Nilai x dan y yang memenuhi sistem persamaan tersebut adalah...",
+                options: ["x = 8 dan y = 4", "x = 4 dan y = 8", "x = 9 dan y = 3", "x = 7 dan y = 5"],
+                answer: 0,
+                explanation: `
+                    <p>Gunakan metode eliminasi dengan menjumlahkan kedua persamaan:</p>
+                    <p>(x + y) + (x − y) = 12 + 4</p>
+                    <p>2x = 16 → <strong>x = 8</strong></p>
+                    <p>Substitusi x = 8 ke persamaan pertama: 8 + y = 12 → <strong>y = 4</strong>.</p>
+                `
+            },
+            {
+                id: 2,
+                topic: "SPLDV",
+                level: "Mudah",
+                question: "Penyelesaian dari sistem persamaan <strong>2x + y = 11</strong> dan <strong>3x − y = 9</strong> adalah (x, y). Nilai dari <strong>x + 2y</strong> adalah...",
+                options: ["8", "10", "11", "14"],
+                answer: 1,
+                explanation: `
+                    <p>Jumlahkan kedua persamaan untuk mengeliminasi y:</p>
+                    <p>(2x + y) + (3x − y) = 11 + 9 → 5x = 20 → <strong>x = 4</strong></p>
+                    <p>Substitusi x = 4 ke 2x + y = 11:</p>
+                    <p>2(4) + y = 11 → 8 + y = 11 → <strong>y = 3</strong></p>
+                    <p>Maka nilai x + 2y = 4 + 2(3) = 4 + 6 = <strong>10</strong>.</p>
+                `
+            },
+            {
+                id: 3,
+                topic: "SPLDV",
+                level: "Mudah",
+                question: "Jika <strong>y = 2x − 3</strong> dan <strong>3x + 2y = 15</strong>, maka nilai x yang memenuhi adalah...",
+                options: ["2", "3", "4", "5"],
+                answer: 1,
+                explanation: `
+                    <p>Gunakan metode substitusi dengan memasukkan y = 2x − 3 ke persamaan kedua:</p>
+                    <p>3x + 2(2x − 3) = 15</p>
+                    <p>3x + 4x − 6 = 15</p>
+                    <p>7x = 21 → <strong>x = 3</strong>.</p>
+                `
+            },
+            {
+                id: 4,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Diketahui sistem persamaan <strong>3x + 2y = 16</strong> dan <strong>2x − 3y = 2</strong>. Nilai dari <strong>4x − y</strong> adalah...",
+                options: ["10", "12", "14", "16"],
+                answer: 2,
+                explanation: `
+                    <p>Eliminasi y dengan menyamakan koefisiennya:</p>
+                    <p>• 3x + 2y = 16 (×3) → 9x + 6y = 48</p>
+                    <p>• 2x − 3y = 2 &nbsp;(×2) → 4x − 6y = 4</p>
+                    <p>Jumlahkan: 13x = 52 → <strong>x = 4</strong></p>
+                    <p>Substitusi x = 4 ke 3x + 2y = 16 → 12 + 2y = 16 → 2y = 4 → <strong>y = 2</strong></p>
+                    <p>Nilai 4x − y = 4(4) − 2 = 16 − 2 = <strong>14</strong>.</p>
+                `
+            },
+            {
+                id: 5,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Himpunan penyelesaian dari <strong>4x − 5y = −11</strong> dan <strong>2x + 3y = 11</strong> adalah {(p, q)}. Nilai dari <strong>p − q</strong> adalah...",
+                options: ["−4", "−2", "2", "4"],
+                answer: 1,
+                explanation: `
+                    <p>Eliminasi x: kalikan persamaan kedua dengan 2 → 4x + 6y = 22.</p>
+                    <p>Kurangkan dengan persamaan pertama:</p>
+                    <p>(4x + 6y) − (4x − 5y) = 22 − (−11) → 11y = 33 → <strong>y = 3</strong></p>
+                    <p>Substitusi y = 3 ke 2x + 3y = 11 → 2x + 9 = 11 → 2x = 2 → <strong>x = 1</strong></p>
+                    <p>Karena p = 1 dan q = 3, maka p − q = 1 − 3 = <strong>−2</strong>.</p>
+                `
+            },
+            {
+                id: 6,
+                topic: "SPLDV",
+                level: "Mudah",
+                question: "Harga 3 buku tulis dan 2 pensil adalah Rp17.000, sedangkan harga 2 buku tulis dan 4 pensil adalah Rp18.000. Harga 1 buku tulis dan 1 pensil adalah...",
+                options: ["Rp5.500", "Rp6.000", "Rp6.500", "Rp7.000"],
+                answer: 2,
+                explanation: `
+                    <p>Misal buku tulis = b, pensil = p:</p>
+                    <p>(1) 3b + 2p = 17.000 (×2) → 6b + 4p = 34.000</p>
+                    <p>(2) 2b + 4p = 18.000</p>
+                    <p>Kurangkan: 4b = 16.000 → <strong>b = 4.000</strong></p>
+                    <p>Substitusi ke (1): 3(4.000) + 2p = 17.000 → 2p = 5.000 → <strong>p = 2.500</strong></p>
+                    <p>Harga 1 buku + 1 pensil = 4.000 + 2.500 = <strong>Rp6.500</strong>.</p>
+                `
+            },
+            {
+                id: 7,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Di sebuah tempat parkir terdapat 60 kendaraan yang terdiri dari sepeda motor (roda 2) dan mobil (roda 4). Jumlah seluruh roda kendaraan adalah 164 buah. Jika tarif parkir motor Rp2.000 dan mobil Rp5.000, total pendapatan parkir saat itu adalah...",
+                options: ["Rp174.000", "Rp180.000", "Rp186.000", "Rp192.000"],
+                answer: 2,
+                explanation: `
+                    <p>Misal banyak motor = m, mobil = b:</p>
+                    <p>(1) m + b = 60</p>
+                    <p>(2) 2m + 4b = 164 (bagi 2) → m + 2b = 82</p>
+                    <p>Kurangkan (2) dengan (1): b = 82 − 60 = <strong>22 mobil</strong></p>
+                    <p>Maka m = 60 − 22 = <strong>38 motor</strong></p>
+                    <p>Total pendapatan = (38 × Rp2.000) + (22 × Rp5.000) = Rp76.000 + Rp110.000 = <strong>Rp186.000</strong>.</p>
+                `
+            },
+            {
+                id: 8,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Jumlah dua bilangan cacah adalah 45 dan selisih kedua bilangan tersebut adalah 9. Hasil kali kedua bilangan tersebut adalah...",
+                options: ["450", "468", "486", "504"],
+                answer: 2,
+                explanation: `
+                    <p>Misal kedua bilangan adalah x dan y:</p>
+                    <p>x + y = 45 dan x − y = 9</p>
+                    <p>Jumlahkan: 2x = 54 → <strong>x = 27</strong></p>
+                    <p>Maka y = 45 − 27 = <strong>18</strong></p>
+                    <p>Hasil kali kedua bilangan = 27 × 18 = <strong>486</strong>.</p>
+                `
+            },
+            {
+                id: 9,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Keliling sebuah persegi panjang adalah 56 cm. Jika panjangnya 6 cm lebih panjang dari lebarnya, maka luas persegi panjang tersebut adalah...",
+                options: ["165 cm²", "176 cm²", "187 cm²", "196 cm²"],
+                answer: 2,
+                explanation: `
+                    <p>Keliling: 2(p + l) = 56 → <strong>p + l = 28</strong></p>
+                    <p>Panjang 6 cm lebih dari lebar → <strong>p − l = 6</strong></p>
+                    <p>Jumlahkan kedua persamaan: 2p = 34 → <strong>p = 17 cm</strong></p>
+                    <p>Maka l = 28 − 17 = <strong>11 cm</strong></p>
+                    <p>Luas = p × l = 17 × 11 = <strong>187 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 10,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Lima tahun yang lalu, umur Ayah sama dengan 4 kali umur Budi. Jika jumlah umur mereka sekarang adalah 55 tahun, maka umur Budi sekarang adalah...",
+                options: ["12 tahun", "14 tahun", "15 tahun", "16 tahun"],
+                answer: 1,
+                explanation: `
+                    <p>Misal umur sekarang: Ayah = A, Budi = B.</p>
+                    <p>(1) A + B = 55 → A = 55 − B</p>
+                    <p>(2) 5 tahun lalu: A − 5 = 4(B − 5) → A − 5 = 4B − 20 → A − 4B = −15</p>
+                    <p>Substitusi A = 55 − B ke (2):</p>
+                    <p>(55 − B) − 4B = −15 → 55 − 5B = −15 → 5B = 70 → <strong>B = 14 tahun</strong>.</p>
+                `
+            },
+            {
+                id: 11,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Penyelesaian dari sistem persamaan <span class='frac'><span>x</span><span>2</span></span> + <span class='frac'><span>y</span><span>3</span></span> = 5 dan <span class='frac'><span>x</span><span>4</span></span> − <span class='frac'><span>y</span><span>3</span></span> = 1 adalah (x, y). Nilai dari <strong>x + y</strong> adalah...",
+                options: ["9", "10", "11", "12"],
+                answer: 2,
+                explanation: `
+                    <p>Jumlahkan langsung kedua persamaan karena +y/3 dan −y/3 saling menghilangkan:</p>
+                    <p>x/2 + x/4 = 5 + 1 → 3x/4 = 6 → 3x = 24 → <strong>x = 8</strong></p>
+                    <p>Substitusi x = 8 ke persamaan pertama:</p>
+                    <p>8/2 + y/3 = 5 → 4 + y/3 = 5 → y/3 = 1 → <strong>y = 3</strong></p>
+                    <p>Jadi, x + y = 8 + 3 = <strong>11</strong>.</p>
+                `
+            },
+            {
+                id: 12,
+                topic: "SPLDV",
+                level: "Sulit",
+                question: "Jika <span class='frac'><span>2</span><span>x</span></span> + <span class='frac'><span>3</span><span>y</span></span> = 13 dan <span class='frac'><span>5</span><span>x</span></span> − <span class='frac'><span>2</span><span>y</span></span> = 4, maka nilai dari <strong>x · y</strong> adalah...",
+                options: ["1/6", "1/3", "1/2", "6"],
+                answer: 0,
+                explanation: `
+                    <p>Misalkan a = 1/x dan b = 1/y, maka:</p>
+                    <p>(1) 2a + 3b = 13 (×2) → 4a + 6b = 26</p>
+                    <p>(2) 5a − 2b = 4 &nbsp;(×3) → 15a − 6b = 12</p>
+                    <p>Jumlahkan: 19a = 38 → a = 2 → <strong>x = 1/2</strong></p>
+                    <p>Substitusi a = 2 ke (1): 4 + 3b = 13 → 3b = 9 → b = 3 → <strong>y = 1/3</strong></p>
+                    <p>Maka x · y = (1/2) · (1/3) = <strong>1/6</strong>.</p>
+                `
+            },
+            {
+                id: 13,
+                topic: "SPLDV",
+                level: "Mudah",
+                question: "Koordinat titik potong antara garis <strong>2x − y = 7</strong> dan garis <strong>x + 3y = −7</strong> adalah...",
+                options: ["(2, 3)", "(2, −3)", "(−2, 3)", "(3, −1)"],
+                answer: 1,
+                explanation: `
+                    <p>Kalikan persamaan pertama dengan 3 → 6x − 3y = 21.</p>
+                    <p>Jumlahkan dengan x + 3y = −7:</p>
+                    <p>7x = 14 → <strong>x = 2</strong></p>
+                    <p>Substitusi x = 2 ke 2x − y = 7 → 4 − y = 7 → <strong>y = −3</strong></p>
+                    <p>Koordinat titik potongnya adalah <strong>(2, −3)</strong>.</p>
+                `
+            },
+            {
+                id: 14,
+                topic: "SPLDV",
+                level: "Sedang",
+                question: "Dalam suatu konser, harga tiket VIP adalah Rp150.000 dan tiket Reguler Rp80.000. Jika terjual 100 tiket dengan total pemasukan Rp10.800.000, maka banyak tiket VIP yang terjual adalah...",
+                options: ["35 tiket", "40 tiket", "45 tiket", "60 tiket"],
+                answer: 1,
+                explanation: `
+                    <p>Misal banyak tiket VIP = v, Reguler = r:</p>
+                    <p>(1) v + r = 100 → r = 100 − v</p>
+                    <p>(2) 150.000v + 80.000r = 10.800.000 (bagi 10.000) → 15v + 8r = 1.080</p>
+                    <p>Substitusi r = 100 − v ke (2):</p>
+                    <p>15v + 8(100 − v) = 1.080 → 7v + 800 = 1.080 → 7v = 280 → <strong>v = 40 tiket</strong>.</p>
+                `
+            },
+            {
+                id: 15,
+                topic: "SPLDV",
+                level: "Sulit",
+                question: "Sebuah pecahan bernilai <strong>1/2</strong> jika pembilang dan penyebutnya masing-masing ditambah 1. Jika pembilang dan penyebutnya masing-masing dikurangi 1, nilainya menjadi <strong>1/3</strong>. Jumlah pembilang dan penyebut pecahan semula adalah...",
+                options: ["8", "9", "10", "12"],
+                answer: 2,
+                explanation: `
+                    <p>Misal pecahan semula adalah x/y:</p>
+                    <p>• (x + 1)/(y + 1) = 1/2 → 2x + 2 = y + 1 → <strong>2x − y = −1</strong></p>
+                    <p>• (x − 1)/(y − 1) = 1/3 → 3x − 3 = y − 1 → <strong>3x − y = 2</strong></p>
+                    <p>Kurangkan persamaan kedua dengan pertama: x = 2 − (−1) → <strong>x = 3</strong></p>
+                    <p>Substitusi ke 2x − y = −1 → 6 − y = −1 → <strong>y = 7</strong></p>
+                    <p>Jumlah pembilang dan penyebut = 3 + 7 = <strong>10</strong>.</p>
+                `
+            },
+
+            // ==================== 15 SOAL BANGUN RUANG ====================
+            {
+                id: 16,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah kubus memiliki panjang rusuk <strong>8 cm</strong>. Luas permukaan dan volume kubus tersebut berturut-turut adalah...",
+                options: ["384 cm² dan 512 cm³", "324 cm² dan 512 cm³", "384 cm² dan 484 cm³", "256 cm² dan 512 cm³"],
+                answer: 0,
+                explanation: `
+                    <p>Diketahui panjang rusuk s = 8 cm:</p>
+                    <p>• Luas permukaan = 6 × s² = 6 × 8² = 6 × 64 = <strong>384 cm²</strong></p>
+                    <p>• Volume = s³ = 8 × 8 × 8 = <strong>512 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 17,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Diketahui luas permukaan sebuah kubus adalah <strong>294 cm²</strong>. Panjang diagonal ruang kubus tersebut adalah...",
+                options: ["7 cm", "7√2 cm", "7√3 cm", "14√3 cm"],
+                answer: 2,
+                explanation: `
+                    <p>Cari panjang rusuk (s) terlebih dahulu:</p>
+                    <p>6 × s² = 294 → s² = 49 → <strong>s = 7 cm</strong></p>
+                    <p>Rumus diagonal ruang kubus = s√3 = <strong>7√3 cm</strong>.</p>
+                `
+            },
+            {
+                id: 18,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah balok berukuran panjang <strong>12 cm</strong>, lebar <strong>8 cm</strong>, dan tinggi <strong>5 cm</strong>. Luas permukaan balok tersebut adalah...",
+                options: ["196 cm²", "360 cm²", "392 cm²", "480 cm²"],
+                answer: 2,
+                explanation: `
+                    <p>Luas permukaan balok = 2 × (p·l + p·t + l·t)</p>
+                    <p>= 2 × (12·8 + 12·5 + 8·5)</p>
+                    <p>= 2 × (96 + 60 + 40) = 2 × 196 = <strong>392 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 19,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Budi ingin membuat kerangka sebuah balok berukuran <strong>15 cm × 10 cm × 8 cm</strong> menggunakan kawat. Jika panjang kawat yang tersedia adalah <strong>1,5 meter</strong>, maka sisa kawat yang tidak terpakai adalah...",
+                options: ["12 cm", "18 cm", "24 cm", "33 cm"],
+                answer: 1,
+                explanation: `
+                    <p>Panjang kawat 1 kerangka balok = 4 × (p + l + t)</p>
+                    <p>= 4 × (15 + 10 + 8) = 4 × 33 = 132 cm</p>
+                    <p>Kawat tersedia = 1,5 meter = 150 cm</p>
+                    <p>Sisa kawat = 150 − 132 = <strong>18 cm</strong>.</p>
+                `
+            },
+            {
+                id: 20,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah prisma tegak memiliki alas berbentuk segitiga siku-siku dengan panjang sisi siku-sikunya <strong>6 cm</strong> dan <strong>8 cm</strong>. Jika tinggi prisma adalah <strong>15 cm</strong>, maka volume prisma tersebut adalah...",
+                options: ["240 cm³", "360 cm³", "480 cm³", "720 cm³"],
+                answer: 1,
+                explanation: `
+                    <p>Luas alas (segitiga) = ½ × 6 × 8 = 24 cm²</p>
+                    <p>Volume prisma = Luas alas × tinggi prisma</p>
+                    <p>= 24 × 15 = <strong>360 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 21,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Sebuah prisma tegak beralaskan segitiga siku-siku dengan panjang sisi siku-siku <strong>9 cm</strong> dan <strong>12 cm</strong>. Jika tinggi prisma <strong>20 cm</strong>, maka luas permukaan prisma tersebut adalah...",
+                options: ["720 cm²", "774 cm²", "828 cm²", "936 cm²"],
+                answer: 2,
+                explanation: `
+                    <p>Cari sisi miring segitiga alas (Pythagoras): √(9² + 12²) = √(81 + 144) = √225 = 15 cm.</p>
+                    <p>• Luas alas = ½ × 9 × 12 = 54 cm²</p>
+                    <p>• Keliling alas = 9 + 12 + 15 = 36 cm</p>
+                    <p>Luas permukaan = (2 × Luas alas) + (Keliling alas × t)</p>
+                    <p>= (2 × 54) + (36 × 20) = 108 + 720 = <strong>828 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 22,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah limas memiliki alas berbentuk persegi dengan panjang sisi <strong>12 cm</strong>. Jika tinggi limas tersebut adalah <strong>10 cm</strong>, maka volume limas adalah...",
+                options: ["360 cm³", "480 cm³", "720 cm³", "1.440 cm³"],
+                answer: 1,
+                explanation: `
+                    <p>Luas alas (persegi) = 12 × 12 = 144 cm²</p>
+                    <p>Volume limas = ⅓ × Luas alas × tinggi</p>
+                    <p>= ⅓ × 144 × 10 = 48 × 10 = <strong>480 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 23,
+                topic: "Bangun Ruang",
+                level: "Sulit",
+                question: "Alas sebuah limas berbentuk persegi dengan panjang sisi <strong>10 cm</strong>. Jika tinggi limas adalah <strong>12 cm</strong>, maka luas permukaan limas tersebut adalah...",
+                options: ["260 cm²", "340 cm²", "360 cm²", "400 cm²"],
+                answer: 2,
+                explanation: `
+                    <p>Cari tinggi sisi tegak (segitiga) dengan Pythagoras:</p>
+                    <p>Setengah sisi alas = 10 / 2 = 5 cm</p>
+                    <p>t_sisi = √(12² + 5²) = √(144 + 25) = √169 = 13 cm</p>
+                    <p>• Luas alas = 10 × 10 = 100 cm²</p>
+                    <p>• Luas 4 sisi tegak = 4 × (½ × 10 × 13) = 4 × 65 = 260 cm²</p>
+                    <p>Luas permukaan = 100 + 260 = <strong>360 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 24,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah tabung memiliki jari-jari alas <strong>7 cm</strong> dan tinggi <strong>20 cm</strong>. Volume tabung tersebut adalah... (gunakan π = 22/7)",
+                options: ["1.540 cm³", "2.640 cm³", "3.080 cm³", "6.160 cm³"],
+                answer: 2,
+                explanation: `
+                    <p>Volume tabung = π × r² × t</p>
+                    <p>= (22/7) × 7 × 7 × 20</p>
+                    <p>= 22 × 7 × 20 = 154 × 20 = <strong>3.080 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 25,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Sebuah gelas berbentuk tabung <strong>tanpa tutup</strong> memiliki diameter <strong>14 cm</strong> dan tinggi <strong>15 cm</strong>. Luas permukaan luar gelas tersebut adalah... (π = 22/7)",
+                options: ["660 cm²", "814 cm²", "968 cm²", "1.024 cm²"],
+                answer: 1,
+                explanation: `
+                    <p>Diameter = 14 cm → jari-jari r = 7 cm.</p>
+                    <p>Luas tabung tanpa tutup = Luas alas + Luas selimut = πr² + 2πrt</p>
+                    <p>• Luas alas = (22/7) × 7 × 7 = 154 cm²</p>
+                    <p>• Luas selimut = 2 × (22/7) × 7 × 15 = 660 cm²</p>
+                    <p>Total luas = 154 + 660 = <strong>814 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 26,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Sebuah kerucut memiliki jari-jari alas <strong>6 cm</strong> dan panjang garis pelukis (s) <strong>10 cm</strong>. Volume kerucut tersebut adalah... (π = 3,14)",
+                options: ["301,44 cm³", "376,80 cm³", "452,16 cm³", "904,32 cm³"],
+                answer: 0,
+                explanation: `
+                    <p>Cari tinggi kerucut (t) dengan Pythagoras:</p>
+                    <p>t = √(s² − r²) = √(10² − 6²) = √(100 − 36) = √64 = 8 cm</p>
+                    <p>Volume kerucut = ⅓ × π × r² × t</p>
+                    <p>= ⅓ × 3,14 × 6 × 6 × 8 = 3,14 × 96 = <strong>301,44 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 27,
+                topic: "Bangun Ruang",
+                level: "Sedang",
+                question: "Sebuah topi ulang tahun berbentuk kerucut tanpa alas memiliki jari-jari <strong>7 cm</strong> dan tinggi <strong>24 cm</strong>. Luas karton minimal yang dibutuhkan untuk membuat 1 buah topi adalah... (π = 22/7)",
+                options: ["528 cm²", "550 cm²", "616 cm²", "704 cm²"],
+                answer: 1,
+                explanation: `
+                    <p>Topi tanpa alas berarti kita hanya mencari <strong>luas selimut kerucut</strong>.</p>
+                    <p>Cari garis pelukis (s): s = √(r² + t²) = √(7² + 24²) = √(49 + 576) = √625 = 25 cm</p>
+                    <p>Luas selimut = π × r × s = (22/7) × 7 × 25 = 22 × 25 = <strong>550 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 28,
+                topic: "Bangun Ruang",
+                level: "Mudah",
+                question: "Sebuah bola memiliki diameter <strong>20 cm</strong>. Luas permukaan bola tersebut adalah... (π = 3,14)",
+                options: ["628 cm²", "1.256 cm²", "2.512 cm²", "5.024 cm²"],
+                answer: 1,
+                explanation: `
+                    <p>Diameter = 20 cm → jari-jari r = 10 cm.</p>
+                    <p>Luas permukaan bola = 4 × π × r²</p>
+                    <p>= 4 × 3,14 × 10² = 4 × 314 = <strong>1.256 cm²</strong>.</p>
+                `
+            },
+            {
+                id: 29,
+                topic: "Bangun Ruang",
+                level: "Sulit",
+                question: "Sebuah bangun ruang gabungan terdiri dari tabung dan kerucut yang berimpit pada alasnya. Panjang jari-jari keduanya <strong>7 cm</strong>, tinggi tabung <strong>10 cm</strong>, dan tinggi kerucut <strong>6 cm</strong>. Volume gabungan bangun tersebut adalah... (π = 22/7)",
+                options: ["1.694 cm³", "1.848 cm³", "2.156 cm³", "2.464 cm³"],
+                answer: 1,
+                explanation: `
+                    <p>Hitung masing-masing volume:</p>
+                    <p>• V_tabung = πr²t = (22/7) × 7 × 7 × 10 = 1.540 cm³</p>
+                    <p>• V_kerucut = ⅓πr²t = ⅓ × (22/7) × 7 × 7 × 6 = 22 × 7 × 2 = 308 cm³</p>
+                    <p>Volume gabungan = 1.540 + 308 = <strong>1.848 cm³</strong>.</p>
+                `
+            },
+            {
+                id: 30,
+                topic: "Bangun Ruang",
+                level: "Sulit",
+                question: "Sebuah kubah masjid berbentuk <strong>setengah bola berongga</strong> dengan panjang diameter <strong>14 meter</strong>. Jika bagian luar kubah akan dicat dengan biaya Rp50.000 per m², maka total biaya pengecatan kubah tersebut adalah... (π = 22/7)",
+                options: ["Rp7.700.000", "Rp15.400.000", "Rp23.100.000", "Rp30.800.000"],
+                answer: 1,
+                explanation: `
+                    <p>Diameter = 14 m → jari-jari r = 7 m.</p>
+                    <p>Luas permukaan luar setengah bola = 2 × π × r²</p>
+                    <p>= 2 × (22/7) × 7 × 7 = 2 × 22 × 7 = 308 m²</p>
+                    <p>Total biaya = 308 m² × Rp50.000 = <strong>Rp15.400.000</strong>.</p>
+                `
+            }
+        ];
+
+        const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+
+        /**
+         * =====================================================================
+         * APPLICATION STATE
+         * =====================================================================
+         */
+        let currentMainTab = 'materi';
+
+        // Mode Belajar State
+        let belajarFilter = 'ALL'; // 'ALL' | 'SPLDV' | 'Bangun Ruang'
+        let belajarFilteredIndices = QUESTIONS.map((_, i) => i);
+        let belajarCurrentPos = 0; // index inside belajarFilteredIndices
+        let belajarAnswers = {}; // { questionId: selectedOptionIndex }
+
+        // Mode Simulasi State
+        let simDurationMinutes = 60;
+        let simStatus = 'intro'; // 'intro' | 'active' | 'result'
+        let simCurrentIndex = 0;
+        let simAnswers = {}; // { questionId: selectedOptionIndex }
+        let simFlags = {};   // { questionId: true }
+        let simSecondsLeft = 3600;
+        let simTimerInterval = null;
+        let simReviewFilter = 'ALL';
+
+        // Modal callback
+        let pendingModalAction = null;
+
+        /**
+         * =====================================================================
+         * MAIN NAVIGATION & MATERI TABS
+         * =====================================================================
+         */
+        function switchMainTab(tab) {
+            currentMainTab = tab;
+
+            const tabs = ['materi', 'belajar', 'simulasi'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const sec = document.getElementById(`section-${t}`);
+                if (t === tab) {
+                    btn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap bg-white text-indigo-700 shadow-sm";
+                    sec.classList.remove('hidden');
+                } else {
+                    btn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900";
+                    sec.classList.add('hidden');
+                }
+            });
+
+            if (tab === 'belajar') {
+                renderBelajar();
+            } else if (tab === 'simulasi') {
+                renderSimView();
+            }
+        }
+
+        function switchMateriSubtab(sub) {
+            const btnSpldv = document.getElementById('subtab-spldv');
+            const btnBangun = document.getElementById('subtab-bangun');
+            const divSpldv = document.getElementById('materi-spldv');
+            const divBangun = document.getElementById('materi-bangun');
+
+            if (sub === 'spldv') {
+                btnSpldv.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition";
+                btnBangun.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition";
+                divSpldv.classList.remove('hidden');
+                divBangun.classList.add('hidden');
+            } else {
+                btnBangun.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition";
+                btnSpldv.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition";
+                divBangun.classList.remove('hidden');
+                divSpldv.classList.add('hidden');
+            }
+        }
+
+        /**
+         * =====================================================================
+         * MODE BELAJAR LOGIC
+         * =====================================================================
+         */
+        function setBelajarFilter(filter) {
+            belajarFilter = filter;
+            belajarFilteredIndices = QUESTIONS
+                .map((q, idx) => ({ q, idx }))
+                .filter(item => filter === 'ALL' || item.q.topic === filter)
+                .map(item => item.idx);
+            belajarCurrentPos = 0;
+
+            // Update filter button styles
+            const map = { 'ALL': 'filter-all', 'SPLDV': 'filter-spldv', 'Bangun Ruang': 'filter-bangun' };
+            Object.entries(map).forEach(([key, id]) => {
+                const el = document.getElementById(id);
+                if (key === filter) {
+                    el.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 shadow-sm";
+                } else {
+                    el.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900";
+                }
+            });
+
+            renderBelajar();
+        }
+
+        function renderBelajar() {
+            const qIndex = belajarFilteredIndices[belajarCurrentPos];
+            const q = QUESTIONS[qIndex];
+            const userAns = belajarAnswers[q.id];
+            const isAnswered = userAns !== undefined;
+
+            // Header Meta
+            document.getElementById('belajar-q-number').textContent = `Soal ${q.id}`;
+            document.getElementById('belajar-q-topic').textContent = q.topic;
+            document.getElementById('belajar-q-counter').textContent = `${belajarCurrentPos + 1} dari ${belajarFilteredIndices.length}`;
+
+            const levelEl = document.getElementById('belajar-q-level');
+            levelEl.textContent = q.level;
+            if (q.level === 'Mudah') {
+                levelEl.className = "px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-semibold";
+            } else if (q.level === 'Sedang') {
+                levelEl.className = "px-2.5 py-1 rounded-lg bg-amber-100 text-amber-700 text-xs font-semibold";
+            } else {
+                levelEl.className = "px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 text-xs font-semibold";
+            }
+
+            // Question Text
+            document.getElementById('belajar-q-text').innerHTML = q.question;
+
+            // Options
+            const optContainer = document.getElementById('belajar-options');
+            optContainer.innerHTML = '';
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.disabled = isAnswered;
+
+                let stateClass = "border-slate-200 bg-white hover:border-indigo-400 hover:bg-indigo-50/40 text-slate-700";
+                let badgeClass = "bg-slate-100 text-slate-700";
+
+                if (isAnswered) {
+                    if (idx === q.answer) {
+                        stateClass = "border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold";
+                        badgeClass = "bg-emerald-600 text-white";
+                    } else if (idx === userAns && userAns !== q.answer) {
+                        stateClass = "border-rose-400 bg-rose-50 text-rose-900";
+                        badgeClass = "bg-rose-600 text-white";
+                    } else {
+                        stateClass = "border-slate-200 bg-slate-50/60 text-slate-400 opacity-75";
+                        badgeClass = "bg-slate-200 text-slate-500";
+                    }
+                }
+
+                btn.className = `w-full text-left p-3.5 sm:p-4 rounded-xl border-2 transition flex items-center gap-3.5 ${stateClass} ${isAnswered ? 'cursor-default' : 'cursor-pointer'}`;
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${badgeClass}">${OPTION_LABELS[idx]}</span>
+                    <span class="text-sm sm:text-base math-eq">${optText}</span>
+                `;
+                btn.onclick = () => selectBelajarAnswer(q.id, idx);
+                optContainer.appendChild(btn);
+            });
+
+            // Explanation Box
+            const expBox = document.getElementById('belajar-explanation');
+            if (isAnswered) {
+                const isCorrect = userAns === q.answer;
+                expBox.classList.remove('hidden');
+                expBox.className = isCorrect
+                    ? "rounded-2xl p-5 border border-emerald-200 bg-emerald-50/70 space-y-2"
+                    : "rounded-2xl p-5 border border-rose-200 bg-rose-50/70 space-y-2";
+                document.getElementById('belajar-exp-header').innerHTML = isCorrect
+                    ? `<span class="text-emerald-700">✓ Jawaban Benar! — Pembahasan:</span>`
+                    : `<span class="text-rose-700">✕ Kurang Tepat (Kunci: ${OPTION_LABELS[q.answer]}) — Pembahasan:</span>`;
+                document.getElementById('belajar-exp-body').innerHTML = q.explanation;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Prev / Next buttons
+            document.getElementById('belajar-btn-prev').disabled = belajarCurrentPos === 0;
+            document.getElementById('belajar-btn-next').disabled = belajarCurrentPos === belajarFilteredIndices.length - 1;
+
+            // Update Stats & Nav Grid
+            updateBelajarStatsAndGrid();
+        }
+
+        function selectBelajarAnswer(qId, optIdx) {
+            if (belajarAnswers[qId] !== undefined) return;
+            belajarAnswers[qId] = optIdx;
+            renderBelajar();
+        }
+
+        function navigateBelajar(delta) {
+            const nextPos = belajarCurrentPos + delta;
+            if (nextPos >= 0 && nextPos < belajarFilteredIndices.length) {
+                belajarCurrentPos = nextPos;
+                renderBelajar();
+            }
+        }
+
+        function updateBelajarStatsAndGrid() {
+            let answered = 0, correct = 0, wrong = 0;
+            belajarFilteredIndices.forEach(idx => {
+                const q = QUESTIONS[idx];
+                const ans = belajarAnswers[q.id];
+                if (ans !== undefined) {
+                    answered++;
+                    if (ans === q.answer) correct++;
+                    else wrong++;
+                }
+            });
+
+            document.getElementById('belajar-stat-answered').textContent = `${answered} / ${belajarFilteredIndices.length}`;
+            document.getElementById('belajar-stat-correct').textContent = correct;
+            document.getElementById('belajar-stat-wrong').textContent = wrong;
+
+            const grid = document.getElementById('belajar-nav-grid');
+            grid.innerHTML = '';
+            belajarFilteredIndices.forEach((qIdx, pos) => {
+                const q = QUESTIONS[qIdx];
+                const ans = belajarAnswers[q.id];
+                const isCurrent = pos === belajarCurrentPos;
+
+                let cls = "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+                if (ans !== undefined) {
+                    cls = ans === q.answer
+                        ? "bg-emerald-500 text-white border-emerald-600"
+                        : "bg-rose-500 text-white border-rose-600";
+                }
+                if (isCurrent) {
+                    cls += " ring-2 ring-indigo-600 ring-offset-1";
+                }
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = q.id;
+                btn.className = `h-9 rounded-lg border text-xs font-bold transition ${cls}`;
+                btn.onclick = () => {
+                    belajarCurrentPos = pos;
+                    renderBelajar();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function openResetBelajarModal() {
+            openModal(
+                "Ulangi Mode Belajar?",
+                "Semua progres jawabanmu di Mode Belajar akan dihapus agar kamu bisa berlatih dari awal lagi.",
+                () => {
+                    belajarAnswers = {};
+                    belajarCurrentPos = 0;
+                    renderBelajar();
+                }
+            );
+        }
+
+        /**
+         * =====================================================================
+         * MODE SIMULASI LOGIC
+         * =====================================================================
+         */
+        function selectSimDuration(mins) {
+            simDurationMinutes = mins;
+            [45, 60, 90].forEach(m => {
+                const btn = document.getElementById(`dur-${m}`);
+                if (m === mins) {
+                    btn.className = "py-2.5 px-3 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-sm font-bold text-indigo-700 transition";
+                } else {
+                    btn.className = "py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition";
+                }
+            });
+        }
+
+        function renderSimView() {
+            document.getElementById('sim-intro').classList.toggle('hidden', simStatus !== 'intro');
+            document.getElementById('sim-active').classList.toggle('hidden', simStatus !== 'active');
+            document.getElementById('sim-result').classList.toggle('hidden', simStatus !== 'result');
+
+            if (simStatus === 'active') {
+                renderSimQuestion();
+            }
+        }
+
+        function startSimulation() {
+            simStatus = 'active';
+            simCurrentIndex = 0;
+            simAnswers = {};
+            simFlags = {};
+            simSecondsLeft = simDurationMinutes * 60;
+
+            clearInterval(simTimerInterval);
+            updateSimTimerDisplay();
+            simTimerInterval = setInterval(() => {
+                simSecondsLeft--;
+                updateSimTimerDisplay();
+                if (simSecondsLeft <= 0) {
+                    clearInterval(simTimerInterval);
+                    finishSimulation();
+                }
+            }, 1000);
+
+            renderSimView();
+        }
+
+        function updateSimTimerDisplay() {
+            const mins = Math.floor(Math.max(0, simSecondsLeft) / 60);
+            const secs = Math.max(0, simSecondsLeft) % 60;
+            const text = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('sim-timer-text').textContent = text;
+
+            const box = document.getElementById('sim-timer-box');
+            if (simSecondsLeft <= 300) {
+                box.className = "px-3.5 py-2 rounded-xl bg-rose-600 text-white font-mono font-bold text-base sm:text-lg flex items-center gap-2 animate-pulse";
+            } else {
+                box.className = "px-3.5 py-2 rounded-xl bg-slate-900 text-white font-mono font-bold text-base sm:text-lg flex items-center gap-2";
+            }
+        }
+
+        function renderSimQuestion() {
+            const q = QUESTIONS[simCurrentIndex];
+            const userAns = simAnswers[q.id];
+            const isFlagged = !!simFlags[q.id];
+
+            document.getElementById('sim-q-number').textContent = `Soal ${q.id} / ${QUESTIONS.length}`;
+            document.getElementById('sim-q-topic').textContent = q.topic;
+            document.getElementById('sim-q-text').innerHTML = q.question;
+
+            // Flag button
+            const flagBtn = document.getElementById('sim-btn-flag');
+            const flagLbl = document.getElementById('sim-flag-label');
+            if (isFlagged) {
+                flagBtn.className = "px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-100 text-xs font-bold text-amber-800 transition flex items-center gap-1.5";
+                flagLbl.textContent = "Ditandai Ragu-ragu";
+            } else {
+                flagBtn.className = "px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:border-amber-300 transition flex items-center gap-1.5";
+                flagLbl.textContent = "Tandai Ragu-ragu";
+            }
+
+            // Options
+            const optContainer = document.getElementById('sim-options');
+            optContainer.innerHTML = '';
+            q.options.forEach((optText, idx) => {
+                const isSelected = userAns === idx;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = isSelected
+                    ? "w-full text-left p-3.5 sm:p-4 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-semibold transition flex items-center gap-3.5"
+                    : "w-full text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-300 hover:bg-slate-50 text-slate-700 transition flex items-center gap-3.5";
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700'}">${OPTION_LABELS[idx]}</span>
+                    <span class="text-sm sm:text-base math-eq">${optText}</span>
+                `;
+                btn.onclick = () => {
+                    simAnswers[q.id] = idx;
+                    renderSimQuestion();
+                };
+                optContainer.appendChild(btn);
+            });
+
+            // Prev / Next
+            document.getElementById('sim-btn-prev').disabled = simCurrentIndex === 0;
+            document.getElementById('sim-btn-next').disabled = simCurrentIndex === QUESTIONS.length - 1;
+
+            // Progress & Grid
+            const answeredCount = Object.keys(simAnswers).length;
+            document.getElementById('sim-progress-text').textContent = `${answeredCount} / ${QUESTIONS.length} Soal`;
+
+            const grid = document.getElementById('sim-nav-grid');
+            grid.innerHTML = '';
+            QUESTIONS.forEach((item, idx) => {
+                const hasAns = simAnswers[item.id] !== undefined;
+                const flagged = !!simFlags[item.id];
+                const isCurr = idx === simCurrentIndex;
+
+                let cls = "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+                if (flagged) {
+                    cls = "bg-amber-400 text-amber-950 border-amber-500";
+                } else if (hasAns) {
+                    cls = "bg-indigo-600 text-white border-indigo-700";
+                }
+                if (isCurr) {
+                    cls += " ring-2 ring-slate-900 ring-offset-1";
+                }
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = item.id;
+                btn.className = `h-9 rounded-lg border text-xs font-bold transition ${cls}`;
+                btn.onclick = () => {
+                    simCurrentIndex = idx;
+                    renderSimQuestion();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function toggleSimFlag() {
+            const q = QUESTIONS[simCurrentIndex];
+            if (simFlags[q.id]) delete simFlags[q.id];
+            else simFlags[q.id] = true;
+            renderSimQuestion();
+        }
+
+        function navigateSim(delta) {
+            const next = simCurrentIndex + delta;
+            if (next >= 0 && next < QUESTIONS.length) {
+                simCurrentIndex = next;
+                renderSimQuestion();
+            }
+        }
+
+        function openFinishSimModal() {
+            const answeredCount = Object.keys(simAnswers).length;
+            const remaining = QUESTIONS.length - answeredCount;
+            const flaggedCount = Object.keys(simFlags).length;
+
+            let msg = `Kamu sudah menjawab <strong>${answeredCount} dari ${QUESTIONS.length}</strong> soal.`;
+            if (remaining > 0) {
+                msg += ` Masih ada <strong>${remaining} soal</strong> yang belum dijawab.`;
+            }
+            if (flaggedCount > 0) {
+                msg += ` Terdapat <strong>${flaggedCount} soal</strong> yang masih ditandai ragu-ragu.`;
+            }
+            msg += ` Yakin ingin mengumpulkan sekarang?`;
+
+            openModal("Kumpulkan Jawaban Simulasi?", msg, finishSimulation);
+        }
+
+        function finishSimulation() {
+            clearInterval(simTimerInterval);
+            simStatus = 'result';
+
+            let correct = 0, wrong = 0, empty = 0;
+            let spldvCorrect = 0, bangunCorrect = 0;
+
+            QUESTIONS.forEach(q => {
+                const ans = simAnswers[q.id];
+                if (ans === undefined) {
+                    empty++;
+                } else if (ans === q.answer) {
+                    correct++;
+                    if (q.topic === 'SPLDV') spldvCorrect++;
+                    else bangunCorrect++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            const score = Math.round((correct / QUESTIONS.length) * 100);
+            document.getElementById('res-score').textContent = score;
+            document.getElementById('res-correct').textContent = correct;
+            document.getElementById('res-wrong').textContent = wrong;
+            document.getElementById('res-empty').textContent = empty;
+
+            // Predicate message
+            const badge = document.getElementById('res-badge');
+            const msgEl = document.getElementById('res-message');
+            if (score >= 85) {
+                badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-100 text-emerald-700";
+                badge.textContent = "Sangat Baik — Siap Ujian!";
+                msgEl.textContent = "Luar biasa! Pemahamanmu pada SPLDV dan Bangun Ruang sudah sangat kuat. Tetap jaga ketelitian pada soal cerita.";
+            } else if (score >= 70) {
+                badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-sky-100 text-sky-700";
+                badge.textContent = "Baik — Tingkatkan Sedikit Lagi";
+                msgEl.textContent = "Hasil yang bagus! Periksa kembali beberapa soal yang masih keliru di pembahasan bawah agar nilaimu makin maksimal.";
+            } else {
+                badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-800";
+                badge.textContent = "Perlu Latihan Lagi";
+                msgEl.textContent = "Jangan menyerah! Cek topik mana yang persentasenya masih rendah, lalu pelajari ulang di tab Materi dan Mode Belajar.";
+            }
+
+            // Topic Breakdown
+            const spldvPct = Math.round((spldvCorrect / 15) * 100);
+            const bangunPct = Math.round((bangunCorrect / 15) * 100);
+            document.getElementById('res-spldv-text').textContent = `${spldvCorrect} / 15 (${spldvPct}%)`;
+            document.getElementById('res-spldv-bar').style.width = `${spldvPct}%`;
+            document.getElementById('res-bangun-text').textContent = `${bangunCorrect} / 15 (${bangunPct}%)`;
+            document.getElementById('res-bangun-bar').style.width = `${bangunPct}%`;
+
+            renderSimReview('ALL');
+            renderSimView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderSimReview(filter) {
+            simReviewFilter = filter;
+            const filterMap = { 'ALL': 'rev-filter-all', 'WRONG': 'rev-filter-wrong', 'CORRECT': 'rev-filter-correct' };
+            Object.entries(filterMap).forEach(([k, id]) => {
+                const btn = document.getElementById(id);
+                if (k === filter) {
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900";
+                }
+            });
+
+            const list = document.getElementById('sim-review-list');
+            list.innerHTML = '';
+
+            const filtered = QUESTIONS.filter(q => {
+                const ans = simAnswers[q.id];
+                const isCorrect = ans === q.answer;
+                if (filter === 'CORRECT') return isCorrect;
+                if (filter === 'WRONG') return !isCorrect;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                list.innerHTML = `<div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm text-slate-500">Tidak ada soal pada kategori filter ini.</div>`;
+                return;
+            }
+
+            filtered.forEach(q => {
+                const ans = simAnswers[q.id];
+                const isCorrect = ans === q.answer;
+                const isEmpty = ans === undefined;
+
+                let statusBadge = '';
+                if (isCorrect) {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-bold">✓ Benar</span>`;
+                } else if (isEmpty) {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 text-xs font-bold">— Tidak Dijawab</span>`;
+                } else {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 text-xs font-bold">✕ Salah</span>`;
+                }
+
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3";
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-bold">No. ${q.id}</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">${q.topic}</span>
+                        </div>
+                        ${statusBadge}
+                    </div>
+                    <p class="text-sm sm:text-base font-medium text-slate-800 math-eq">${q.question}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                        <div class="p-3 rounded-xl border ${isCorrect ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
+                            <strong>Jawaban Kamu:</strong> ${isEmpty ? '<em>Kosong</em>' : `${OPTION_LABELS[ans]}. ${q.options[ans]}`}
+                        </div>
+                        <div class="p-3 rounded-xl border bg-indigo-50 border-indigo-200 text-indigo-900">
+                            <strong>Kunci Jawaban:</strong> ${OPTION_LABELS[q.answer]}. ${q.options[q.answer]}
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-1 math-eq">
+                        <div class="font-bold text-slate-900 mb-1">Pembahasan:</div>
+                        ${q.explanation}
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function resetSimulationToIntro() {
+            clearInterval(simTimerInterval);
+            simStatus = 'intro';
+            renderSimView();
+        }
+
+        /**
+         * =====================================================================
+         * CUSTOM MODAL HELPERS
+         * =====================================================================
+         */
+        function openModal(title, bodyHtml, onConfirm) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-body').innerHTML = bodyHtml;
+            pendingModalAction = onConfirm;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+            pendingModalAction = null;
+        }
+
+        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+            const action = pendingModalAction;
+            closeModal();
+            if (typeof action === 'function') action();
+        });
+
+        // Initial Render
+        renderBelajar();
+    </script>
+</body>
+</html>
